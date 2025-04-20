@@ -24,15 +24,6 @@ class RegisterAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class LoginAPIView(APIView):
-#     def post(self, request):
-#         serializer = LoginSerializer(data=request.data)
-#         if serializer.is_valid():
-#             user = serializer.validated_data
-#             login(request, user)  # Log the user in (creates session)
-#             return Response({"message": "Login successful."})
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class LoginAPIView(APIView):
     def post(self, request):
