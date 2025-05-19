@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,10 +26,10 @@ SECRET_KEY = 'django-insecure-btbcol3$n&xj5b@594qnxbdy_wjg!4-o53ts#=o3u4j2fzq@53
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'superadmin.User'
+
 ALLOWED_HOSTS = []
 
-
-# auth_user_model = 'superadmin.User'
 
 # Application definition
 
@@ -42,12 +43,27 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'superadmin',
+    'landlord',
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=10),  # Short-lived access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),    # Longer refresh token
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
 }
 
 MIDDLEWARE = [
@@ -84,10 +100,21 @@ WSGI_APPLICATION = 'apartment.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mkdb',       # The name of your database
+        'USER': 'root',      # Your MySQL username (e.g., 'root')
+        'PASSWORD': '1234',  # Your MySQL password
+        'HOST': 'localhost',                # Or IP address of your MySQL server
+        'PORT': '3306',                     # Default MySQL port
     }
 }
 

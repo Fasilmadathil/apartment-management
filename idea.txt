@@ -1,0 +1,92 @@
+the project for appartment management sytem 
+------------------------------------------------
+
+user types
+
+    1. superadmin - the user controll all level
+    2. admin - the user can control all level except superadmin
+    3. user - the user can only control his own level
+
+    --the admin also known as landlord or owner of the property 
+    --the user also known as tenant or renter of the property
+
+operation for the users
+-----------------------------
+
+admin or landlord 
+    1. add ,delete ,update  new appartment (under him)
+    2. add ,delete ,update  new user(tenant)
+    3. view the collected, pending rent ( under him)
+    4. view the appartment details (under him)
+    5. view the user details (under his appartment) with the deatils of appartment name and room  etc..
+    6. add, edit, delete, approve the payment of the user 
+    7. view the payment history of the user (under him)
+
+user or tenant
+    1.view his room and details 
+    2.do payment (intially uplaod screen short)
+    3.view his payment history
+    4.register complaints
+    5.view the status of his complaint
+    6.view room rent aggriment 
+    7.get contact deatil of caretaker or owner
+    
+
+
+
+apps
+----------------
+    superadmin
+    landlord
+    tenant
+
+
+
+
+
+
+admin(landloard)
+-------------------								   
+register
+login
+logout
+view profile
+edit profile
+add user(tenets) - and assign user to property 
+delete user(tenets)
+add property 
+view property
+
+view retal income --based on proprty/all 
+view retal pending -- based on proprty/all
+
+view electricity bill payment 
+
+mark rent as paid
+send message to user who not paid rent individual/all
+view complaints  property/all
+
+analize retal income with previous data 
+
+
+send community message 
+
+
+try for a real time chat boat also 
+
+
+
+tenents
+-------------
+ login
+ logout
+ view profile
+ edit profile -- not propery 
+ add complaints
+ view complaints
+ pay rent
+ view rent history
+ pay electricity bill
+ view electricity bill history
+ read community message
+ chat with other tenents
