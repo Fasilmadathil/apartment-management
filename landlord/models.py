@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from superadmin.models import User
 
 
@@ -111,3 +113,26 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"{self.tenant.username} - {self.amount} - {self.status}"
+
+
+@receiver(post_save, sender=Payment)
+def notify_landlord_payment_uploaded(sender, instance, created, **kwargs):
+    if created:
+        # Get the landlord of the property
+        landlord = instance.room.property.landlord
+        tenant = instance.tenant
+        
+        # You can add email notification here
+        # For now, we'll just print to console (replace with email/notification system)
+        print(f"NOTIFICATION: Tenant {tenant.username} uploaded payment of ${instance.amount} for room {instance.room.room_number}")
+        print(f"Landlord {landlord.username} should be notified")
+        
+        # TODO: Add email notification
+        # from django.core.mail import send_mail
+        # send_mail(
+        #     f'New Payment Uploaded - {instance.room.property.name}',
+        #     f'Tenant {tenant.username} uploaded payment of ${instance.amount} for room {instance.room.room_number}',
+        #     'from@example.com',
+        #     [landlord.email],
+        #     fail_silently=False,
+        # )
