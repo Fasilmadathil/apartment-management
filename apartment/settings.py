@@ -110,11 +110,11 @@ WSGI_APPLICATION = 'apartment.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mkdb',       # The name of your database
+        'NAME': 'mkdb',      # The name of your database
         'USER': 'root',      # Your MySQL username (e.g., 'root')
         'PASSWORD': '1234',  # Your MySQL password
-        'HOST': 'localhost',                # Or IP address of your MySQL server
-        'PORT': '3306',                     # Default MySQL port
+        'HOST': 'localhost',  # Or IP address of your MySQL server
+        'PORT': '3306',      # Default MySQL port
     }
 }
 
