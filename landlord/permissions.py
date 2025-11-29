@@ -6,7 +6,7 @@ class IsLandlord(BasePermission):
         return (
             request.user.is_authenticated and
             request.user.role and
-            request.user.role.name in ['Admin']
+            request.user.role.name in ['admin']
         )
 
 
@@ -15,5 +15,5 @@ class IsTenant(BasePermission):
         return (
             request.user.is_authenticated and
             request.user.role and
-            request.user.role.name == 'User'
+            request.user.role.name == 'tenant'
         )
