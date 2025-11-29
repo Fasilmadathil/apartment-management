@@ -35,7 +35,8 @@ A robust, API-first backend solution designed to streamline the operations of re
 
 1.  **Clone the repository**
     ```bash
-    git clone <repository-url>
+    # Clone into a folder named 'apartment'
+    git clone <repository-url> apartment
     cd apartment
     ```
 
