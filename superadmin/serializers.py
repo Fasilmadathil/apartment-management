@@ -14,10 +14,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'password']
 
     def create(self, validated_data):
+        try:
+            role = Role.objects.get(name='admin')
+        except Role.DoesNotExist:
+            raise serializers.ValidationError(
+                {"role": "Default role 'user' not found."})
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email', ''),
-            password=validated_data['password']
+            password=validated_data['password'],
+            role=role
         )
         return user
 
@@ -46,15 +52,15 @@ class AddUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         try:
-            role = Role.objects.get(name='user')
+            role = Role.objects.get(name='tenant')
         except Role.DoesNotExist:
             raise serializers.ValidationError(
                 {"role": "Default role 'user' not found."})
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data.get('email', ''),
-            password=validated_data['password']
+            password=validated_data['password'],
+            role=role
         )
-        user.role = role
         user.save()
         return user
