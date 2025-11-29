@@ -1,22 +1,38 @@
-# .gitignore
-
-# Python
+# General
+*.log
+*.pot
 *.pyc
 __pycache__/
+.DS_Store
 
-# Virtual Environment
+# Environments
+.env
+.venv
 env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
 # Django
 *.sqlite3
 db.sqlite3
-/media/
-/staticfiles/
-/*.log
+media/
+staticfiles/
+static/
 
-# VSCode or IDEs
-.vscode/
+# IDEs and Editors
 .idea/
+.vscode/
+*.swp
+*.swo
 
-# Environment Variables
-.env
+# Testing
+.coverage
+htmlcov/
+coverage.xml
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
