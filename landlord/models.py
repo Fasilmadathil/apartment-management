@@ -135,19 +135,9 @@ class Payment(models.Model):
 @receiver(post_save, sender=Payment)
 def notify_landlord_payment_uploaded(sender, instance, created, **kwargs):
     if created:
-        # Get the landlord of the property
-        landlord = instance.room.property.landlord
-        tenant = instance.tenant
-        
-        # Send email notification
-        from django.core.mail import send_mail
-        send_mail(
-            f'New Payment Uploaded - {instance.room.property.name}',
-            f'Tenant {tenant.username} uploaded payment of ${instance.amount} for room {instance.room.room_number}',
-            'from@example.com',
-            [landlord.email],
-            fail_silently=True,
-        )
+        # Offload email to Celery worker (non-blocking)
+        from .tasks import send_payment_notification
+        send_payment_notification.delay(instance.id)
 
 
 class ElectricityBill(models.Model):
